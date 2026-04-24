@@ -1,0 +1,357 @@
+:root {
+  --bg: #020202;
+  --bg-soft: #0b0b0b;
+  --text: #f5f5f3;
+  --muted: rgba(245, 245, 243, 0.64);
+  --button-text: #050505;
+  --button-bg: #f4f2ef;
+  --ring-glow: rgba(255, 255, 255, 0.08);
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  --shift-x: 0px;
+  --shift-y: 0px;
+  --button-scale: 1;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 0, rgba(255, 255, 255, 0.015) 18%, transparent 36%),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 0, transparent 58%),
+    linear-gradient(180deg, #050505, #020202 45%, #050505);
+  color: var(--text);
+}
+
+body {
+  overflow: hidden;
+  font-family: "Montserrat", sans-serif;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(circle at 50% 50%, black, transparent 84%);
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, black, transparent 84%);
+}
+
+.entry-page {
+  min-height: 100vh;
+  padding: clamp(24px, 4vw, 44px);
+}
+
+.entry-hero {
+  min-height: calc(100vh - clamp(48px, 8vw, 88px));
+  display: grid;
+  grid-template-columns: minmax(260px, 420px) minmax(320px, 1fr);
+  align-items: center;
+  gap: clamp(24px, 5vw, 80px);
+}
+
+.entry-copy {
+  max-width: 420px;
+  position: relative;
+  z-index: 2;
+}
+
+.eyebrow {
+  margin: 0 0 18px;
+  font-size: 0.78rem;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.entry-copy h1 {
+  margin: 0;
+  font-size: clamp(2.6rem, 5vw, 5.6rem);
+  line-height: 0.93;
+  letter-spacing: -0.08em;
+  font-weight: 600;
+}
+
+.intro {
+  margin: 26px 0 0;
+  max-width: 360px;
+  font-size: 0.98rem;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+.orbital-stage {
+  position: relative;
+  min-height: 78vh;
+  display: grid;
+  place-items: center;
+  perspective: 1200px;
+  isolation: isolate;
+}
+
+.orbital-stage::before,
+.orbital-stage::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.orbital-stage::before {
+  width: min(72vmin, 720px);
+  aspect-ratio: 1;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0) 62%);
+  filter: blur(36px);
+  opacity: 0.55;
+}
+
+.orbital-stage::after {
+  width: min(88vmin, 840px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 80px var(--ring-glow);
+}
+
+.orbital-tilt {
+  position: relative;
+  width: min(82vmin, 780px);
+  aspect-ratio: 1;
+  transform-style: preserve-3d;
+  transform:
+    translate3d(var(--shift-x), var(--shift-y), 0)
+    rotateX(var(--tilt-x))
+    rotateY(var(--tilt-y));
+  transition: transform 180ms ease-out;
+}
+
+.ring {
+  position: absolute;
+  inset: 0;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+  filter: drop-shadow(0 0 22px rgba(255, 255, 255, 0.04));
+}
+
+.ring svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.ring text {
+  fill: var(--text);
+  font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.ring-outer {
+  animation-name: spin-clockwise;
+  animation-duration: 28s;
+}
+
+.ring-outer text {
+  font-size: 7.4px;
+}
+
+.ring-middle {
+  inset: 14%;
+  animation-name: spin-counter;
+  animation-duration: 22s;
+}
+
+.ring-middle text {
+  font-size: 7px;
+}
+
+.ring-inner {
+  inset: 28%;
+  animation-name: spin-clockwise;
+  animation-duration: 16s;
+}
+
+.ring-inner text {
+  font-size: 6.4px;
+}
+
+.enter-button {
+  position: absolute;
+  inset: 50%;
+  width: min(20vmin, 164px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%) scale(var(--button-scale));
+  transform-origin: center;
+  border: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.9) 42%, rgba(234, 231, 227, 0.98) 100%);
+  color: var(--button-text);
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.44),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  z-index: 3;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.enter-button span {
+  font-family: "Oswald", sans-serif;
+  font-size: clamp(1.6rem, 2.2vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  transform: scaleX(0.9);
+}
+
+.enter-button:hover,
+.enter-button:focus-visible {
+  --button-scale: 1.07;
+  box-shadow:
+    0 22px 64px rgba(0, 0, 0, 0.5),
+    0 0 0 14px rgba(255, 255, 255, 0.05),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+}
+
+.enter-button:active {
+  --button-scale: 0.98;
+}
+
+.enter-button.is-pressed {
+  --button-scale: 0.94;
+  box-shadow:
+    0 10px 34px rgba(0, 0, 0, 0.34),
+    0 0 0 22px rgba(255, 255, 255, 0.035),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.14);
+}
+
+.enter-button:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.55);
+  outline-offset: 10px;
+}
+
+@keyframes spin-clockwise {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-counter {
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@media (max-width: 900px) {
+  body {
+    overflow-y: auto;
+  }
+
+  .entry-hero {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .entry-copy {
+    max-width: 680px;
+  }
+
+  .intro {
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .orbital-stage {
+    min-height: auto;
+    width: 100%;
+    padding: 12px 0 20px;
+  }
+
+  .orbital-tilt {
+    width: min(92vw, 720px);
+  }
+}
+
+@media (max-width: 640px) {
+  .entry-page {
+    padding: 18px;
+  }
+
+  .entry-hero {
+    min-height: auto;
+    padding: 20px 0 32px;
+  }
+
+  .eyebrow {
+    letter-spacing: 0.28em;
+  }
+
+  .entry-copy h1 {
+    font-size: clamp(2.2rem, 12vw, 4rem);
+  }
+
+  .intro {
+    font-size: 0.92rem;
+    line-height: 1.65;
+  }
+
+  .orbital-tilt {
+    width: min(96vw, 540px);
+  }
+
+  .ring-outer text {
+    font-size: 8.2px;
+    letter-spacing: 0.14em;
+  }
+
+  .ring-middle text {
+    font-size: 7.2px;
+    letter-spacing: 0.14em;
+  }
+
+  .ring-inner text {
+    font-size: 6.8px;
+    letter-spacing: 0.12em;
+  }
+
+  .enter-button {
+    width: min(24vmin, 126px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbital-tilt {
+    transition: none;
+  }
+
+  .ring {
+    animation-duration: 0.001ms;
+    animation-iteration-count: 1;
+  }
+
+  .enter-button {
+    transition: none;
+  }
+}

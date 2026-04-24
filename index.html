@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orbital Entry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="entry-page">
+    <section class="entry-hero" aria-label="Interactive entry">
+      <div class="entry-copy">
+        <p class="eyebrow">Interactive Entrance</p>
+        <h1>Spiral typography pulls the visitor into a single action.</h1>
+        <p class="intro">
+          A kinetic landing moment inspired by circular editorial motion, rebuilt with plain HTML, CSS, and JavaScript.
+        </p>
+      </div>
+
+      <div class="orbital-stage" id="orbital-stage">
+        <div class="orbital-tilt">
+          <div class="ring ring-outer" aria-hidden="true">
+            <svg viewBox="0 0 100 100">
+              <defs>
+                <path id="ring-outer-path" d="M 50,50 m -42,0 a 42,42 0 1,1 84,0 a 42,42 0 1,1 -84,0"></path>
+              </defs>
+              <text>
+                <textPath href="#ring-outer-path" startOffset="0%">
+                  THINKING DIFFERENT BELIEVE IN THINKING DIFFERENT BELIEVE IN
+                </textPath>
+              </text>
+            </svg>
+          </div>
+
+          <div class="ring ring-middle" aria-hidden="true">
+            <svg viewBox="0 0 100 100">
+              <defs>
+                <path id="ring-middle-path" d="M 50,50 m -31,0 a 31,31 0 1,1 62,0 a 31,31 0 1,1 -62,0"></path>
+              </defs>
+              <text>
+                <textPath href="#ring-middle-path" startOffset="0%">
+                  EXPERIMENTAL PORTFOLIO EXPERIMENTAL PORTFOLIO
+                </textPath>
+              </text>
+            </svg>
+          </div>
+
+          <div class="ring ring-inner" aria-hidden="true">
+            <svg viewBox="0 0 100 100">
+              <defs>
+                <path id="ring-inner-path" d="M 50,50 m -20.5,0 a 20.5,20.5 0 1,1 41,0 a 20.5,20.5 0 1,1 -41,0"></path>
+              </defs>
+              <text>
+                <textPath href="#ring-inner-path" startOffset="0%">
+                  MERCURY CIRCLES MERCURY CIRCLES
+                </textPath>
+              </text>
+            </svg>
+          </div>
+
+          <button class="enter-button" type="button" aria-label="Enter experience">
+            <span>ENTER</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
