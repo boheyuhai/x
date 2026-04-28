@@ -1,39 +1,31 @@
-const stage = document.getElementById("orbital-stage");
+const revealItems = document.querySelectorAll(".reveal");
 
-if (stage) {
-  const root = document.documentElement;
-  const enterButton = stage.querySelector(".enter-button");
+if ("IntersectionObserver" in window) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.14,
+      rootMargin: "0px 0px -8% 0px",
+    }
+  );
 
-  const updateMotion = (clientX, clientY) => {
-    const rect = stage.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const offsetX = (clientX - centerX) / rect.width;
-    const offsetY = (clientY - centerY) / rect.height;
+  revealItems.forEach((item) => observer.observe(item));
+} else {
+  revealItems.forEach((item) => item.classList.add("is-visible"));
+}
 
-    root.style.setProperty("--tilt-x", `${offsetY * -10}deg`);
-    root.style.setProperty("--tilt-y", `${offsetX * 12}deg`);
-    root.style.setProperty("--shift-x", `${offsetX * 24}px`);
-    root.style.setProperty("--shift-y", `${offsetY * 24}px`);
-  };
+const exploreLink = document.querySelector(".explore-link");
 
-  stage.addEventListener("pointermove", (event) => {
-    updateMotion(event.clientX, event.clientY);
+if (exploreLink) {
+  exploreLink.addEventListener("click", () => {
+    exploreLink.classList.add("is-active");
+    window.setTimeout(() => exploreLink.classList.remove("is-active"), 220);
   });
-
-  stage.addEventListener("pointerleave", () => {
-    root.style.setProperty("--tilt-x", "0deg");
-    root.style.setProperty("--tilt-y", "0deg");
-    root.style.setProperty("--shift-x", "0px");
-    root.style.setProperty("--shift-y", "0px");
-  });
-
-  if (enterButton) {
-    enterButton.addEventListener("click", () => {
-      enterButton.classList.add("is-pressed");
-      window.setTimeout(() => {
-        enterButton.classList.remove("is-pressed");
-      }, 220);
-    });
-  }
 }
