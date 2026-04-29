@@ -38,6 +38,7 @@ body {
   background: var(--white);
   font-family: Arial, "Helvetica Neue", Helvetica, "PingFang SC", "Microsoft YaHei", sans-serif;
   letter-spacing: 0;
+  overflow-x: hidden;
 }
 
 body.home-entry-page {
@@ -79,7 +80,7 @@ li {
 }
 
 .site-page {
-  overflow: hidden;
+  overflow: visible;
 }
 
 .home-entry {
@@ -384,6 +385,31 @@ li {
   object-position: center top;
   filter: saturate(0.94);
   z-index: 0;
+}
+
+.receipt-intro {
+  position: relative;
+  min-height: 430vh;
+  background: #fafafa;
+}
+
+.receipt-intro__stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  min-height: 720px;
+  overflow: hidden;
+  background: #fafafa;
+}
+
+.receipt-intro__frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  pointer-events: none;
 }
 
 .hero__brand {
@@ -1099,6 +1125,19 @@ li {
     width: min(calc(100% - 32px), var(--max));
   }
 
+  .receipt-intro {
+    min-height: 360vh;
+  }
+
+  .receipt-intro__stage {
+    min-height: 680px;
+  }
+
+  .receipt-intro__frame {
+    width: 100%;
+    height: 100%;
+  }
+
   .hero {
     min-height: 780px;
   }
@@ -1283,6 +1322,15 @@ li {
 }
 
 @media (max-width: 560px) {
+  .receipt-intro__stage {
+    min-height: 620px;
+  }
+
+  .receipt-intro__frame {
+    width: 100%;
+    height: 100%;
+  }
+
   .hero {
     min-height: 720px;
   }

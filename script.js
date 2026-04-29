@@ -30,6 +30,59 @@ if (exploreLink) {
   });
 }
 
+const receiptIntro = document.querySelector(".receipt-intro");
+const receiptFrame = document.querySelector(".receipt-intro__frame");
+
+if (receiptIntro && receiptFrame) {
+  const syncReceiptScroll = () => {
+    const rect = receiptIntro.getBoundingClientRect();
+    const travel = Math.max(1, receiptIntro.offsetHeight - window.innerHeight);
+    const progress = Math.min(1, Math.max(0, -rect.top / travel));
+
+    receiptFrame.contentWindow?.postMessage(
+      {
+        type: "receipt-scroll-progress",
+        progress,
+      },
+      "*"
+    );
+  };
+
+  const syncReceiptPointer = (event) => {
+    const rect = receiptFrame.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    const active = x >= 0 && x <= rect.width && y >= 0 && y <= rect.height;
+
+    receiptFrame.contentWindow?.postMessage(
+      {
+        type: "receipt-pointer",
+        active,
+        x,
+        y,
+      },
+      "*"
+    );
+  };
+
+  const resetReceiptPointer = () => {
+    receiptFrame.contentWindow?.postMessage(
+      {
+        type: "receipt-pointer",
+        active: false,
+      },
+      "*"
+    );
+  };
+
+  receiptFrame.addEventListener("load", syncReceiptScroll);
+  window.addEventListener("scroll", syncReceiptScroll, { passive: true });
+  window.addEventListener("pointermove", syncReceiptPointer, { passive: true });
+  window.addEventListener("pointerleave", resetReceiptPointer);
+  window.addEventListener("resize", syncReceiptScroll);
+  syncReceiptScroll();
+}
+
 const particleCanvas = document.getElementById("particleCanvas");
 
 if (particleCanvas) {
