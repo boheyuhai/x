@@ -13,6 +13,7 @@
   --black-max: 1420px;
   --black-label-col: clamp(250px, 20vw, 360px);
   --black-grid-gap: clamp(84px, 8vw, 160px);
+  --advantage-right-offset: 12px;
   --advantage-header-track: 102px;
   --advantage-row-track: 158px;
   --story-kicker-col: 250px;
@@ -217,9 +218,13 @@ li {
   padding-bottom: 120px;
 }
 
+.definition .container {
+  width: min(calc(100% - 40px), var(--black-max));
+}
+
 .definition__statement {
   width: min(620px, 100%);
-  margin-left: clamp(520px, 41.5vw, 720px);
+  margin-left: calc(var(--black-label-col) + var(--black-grid-gap));
 }
 
 .blue-text,
@@ -261,20 +266,20 @@ li {
 
 .rule {
   height: 1px;
-  margin: 88px var(--right) 74px var(--left);
+  margin: 88px 0 74px;
   background: var(--line);
 }
 
 .info-grid {
   display: grid;
-  grid-template-columns: var(--left) 1fr;
-  gap: clamp(64px, 10vw, 190px);
+  grid-template-columns: var(--black-label-col) 1fr;
+  gap: var(--black-grid-gap);
   align-items: start;
-  margin: 0 var(--right) 64px var(--left);
+  margin: 0 0 64px;
 }
 
 .info-label {
-  text-align: center;
+  text-align: right;
 }
 
 .info-label h3 {
@@ -362,7 +367,7 @@ li {
 }
 
 .info-label--dark {
-  align-self: center;
+  align-self: start;
 }
 
 .compare-labels {
@@ -370,7 +375,7 @@ li {
   align-content: start;
   gap: 54px;
   padding-top: 34px;
-  text-align: center;
+  text-align: right;
 }
 
 .compare-labels h3 {
@@ -426,11 +431,11 @@ li {
 }
 
 .advantage-grid {
-  width: min(100%, 1180px);
+  width: 100%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 280px minmax(0, 1fr);
-  column-gap: 92px;
+  grid-template-columns: var(--black-label-col) minmax(0, 1fr);
+  column-gap: var(--black-grid-gap);
   row-gap: 0;
   align-items: start;
 }
@@ -443,6 +448,7 @@ li {
   min-height: 74px;
   display: grid;
   align-content: start;
+  transform: translateY(var(--advantage-right-offset));
 }
 
 .advantage-copy-header h2 {
@@ -460,9 +466,9 @@ li {
   min-height: 116px;
   display: grid;
   align-content: center;
-  justify-items: center;
-  text-align: center;
-  padding: 0 8px;
+  justify-items: end;
+  text-align: right;
+  padding: 0 14px 0 8px;
 }
 
 .advantage-side span {
@@ -488,6 +494,7 @@ li {
   min-height: 116px;
   border-top: 1px solid var(--line-dark);
   padding-top: 10px;
+  transform: translateY(var(--advantage-right-offset));
 }
 
 .advantage-main h3 {
@@ -550,6 +557,10 @@ li {
   align-items: start;
 }
 
+.section-kicker {
+  text-align: right;
+}
+
 .section-kicker p,
 .section-kicker span {
   display: block;
@@ -575,6 +586,7 @@ li {
   padding-top: 48px;
   width: min(100%, var(--story-copy-col));
   max-width: var(--story-copy-col);
+  text-align: left;
 }
 
 .article-copy h3 {
@@ -598,6 +610,7 @@ li {
   padding-top: 112px;
   color: #d8d8d8;
   max-width: var(--story-quote-col);
+  text-align: left;
 }
 
 .quote-mark span {
@@ -705,16 +718,6 @@ li {
 
   .explore-link {
     top: 770px;
-  }
-
-  .definition__statement {
-    margin-left: 38vw;
-  }
-
-  .advantage-grid {
-    width: min(100%, 1000px);
-    grid-template-columns: 240px minmax(0, 1fr);
-    column-gap: 72px;
   }
 
   .three-column-section {
@@ -827,6 +830,7 @@ li {
   .advantage-copy-header {
     min-height: auto;
     margin-bottom: 18px;
+    transform: none;
   }
 
   .advantage-side {
@@ -837,9 +841,14 @@ li {
     align-content: start;
   }
 
+  .section-kicker {
+    text-align: left;
+  }
+
   .advantage-main {
     min-height: auto;
     padding-top: 14px;
+    transform: none;
   }
 
   .image-statement__title {
